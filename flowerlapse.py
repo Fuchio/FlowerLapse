@@ -1,4 +1,3 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
 from pathlib import Path
 import argparse
 import cv2
@@ -6,6 +5,7 @@ import cv2
 from functionality.test_camera import test_image, test_stream
 from functionality.timelapse import timelapse
 
+PATH = Path().resolve()
 
 def main():
     parser = argparse.ArgumentParser()
@@ -28,7 +28,12 @@ def main():
     parser.add_argument('--sec_between',
                         type=int,
                         default=30,
-                        help='Seconds between each image.')
+                        help='Seconds between each image. Default at 30, mutually exclusive with min_between.')
+
+    parser.add_argument('--min_between',
+                        type=int,
+                        default=0,
+                        help='Minutes between each image. Defaults to 0 which means OFF, mutually exclusive with sec_between.')
 
     parser.add_argument('--start_hour',
                         type=int,
@@ -37,22 +42,30 @@ def main():
 
     parser.add_argument('--end_hour',
                         type=int,
-                        default=22,
-                        help='Stop taking pictures for the timelapse after 22:00 by default. Int between 1 and 24.')
+                        default=24,
+                        help='Stop taking pictures for the timelapse after 24:00 by default. Int between 1 and 24.')
+
+    parser.add_argument('--path',
+                        type=str,
+                        default=str(PATH),
+                        help='Base path where all directories will be created. Default is current directory.')
+
+    parser.add_argument('--timezone',
+                        type=str,
+                        default='CET',
+                        help='Settable timezone for hour range, default is CET.')
+
+    parser.add_argument('--extension',
+                        type=str,
+                        default='jpg',
+                        help='Image extension, can be .jpg, .png or any OpenCV supported format. default is .jpg.')
 
 
-    # Save path
-    # Timezone
-    # Daily lapse (true/false)
-    # Weekly lapse (true/false)
+    # Daily lapse ?
+    # Weekly lapse ?
     # Monthly lapse ?
     # Total lapse ?
 
-
-    # parser.add_argument('-t',
-    #                     '--test_image',
-    #                     type=str,
-    #                     help='Base path where images and timelapses will be saved')
 
     args = parser.parse_args()
 
@@ -66,6 +79,7 @@ def main():
         test_stream(args)
 
     else:
+        print('RUNNING: TIMELAPSE')
         timelapse(args)
 
 
