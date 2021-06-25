@@ -1,11 +1,18 @@
 from pathlib import Path
+from datetime import datetime
 import argparse
 import cv2
+import uuid
 
 from functionality.test_camera import test_image, test_stream
 from functionality.timelapse import timelapse
 
 PATH = Path().resolve()
+now = datetime.now()
+day = now.strftime("%d_%m")
+
+uuid = str(uuid.uuid1())
+TIMELAPSE_ID = uuid[0:uuid.find('-')]
 
 def main():
     parser = argparse.ArgumentParser()
@@ -14,6 +21,11 @@ def main():
                         type=int,
                         default=0,
                         help='ID of the camera that will be used. Default = 0, integrated webcam is usually 0 and if only one camera is connected the ID is always 0.')
+
+    parser.add_argument('--timelapse_id',
+                        type=str,
+                        default=TIMELAPSE_ID,
+                        help='ID that will be used to create a base directory to store images. Defaults to a generated ID.')
 
     parser.add_argument('--test_image',
                         default=False,
@@ -44,6 +56,11 @@ def main():
                         type=int,
                         default=24,
                         help='Stop taking pictures for the timelapse after 24:00 by default. Int between 1 and 24.')
+
+    parser.add_argument('--fps',
+                        type=int,
+                        default=30,
+                        help='Frames per second for the timelapse. 24 or 30 is recommended. Default is 30.')
 
     parser.add_argument('--path',
                         type=str,

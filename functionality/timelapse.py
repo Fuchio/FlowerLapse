@@ -1,5 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
+from pathlib import Path
 import os
 import cv2
 
@@ -14,21 +15,21 @@ def capture_image(**kwargs):
     now = datetime.now()
     day = now.strftime("%d_%m")
     # TODO: Fix timelapse ID
-    folder = args.path + '/timelapse_ID/' + day + '/images'
+    folder = args.path + '/' + args.timelapse_id + '/' + day + '/images'
     if not os.path.exists(folder):
         os.makedirs(folder)
     # Try to take image
 
-    cam = cv2.VideoCapture(args.cam_id)
+    cam = cv2.VideoCapture(args.cam_id, cv2.CAP_DSHOW)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')
     else:
         s, img = cam.read()
         if s:
-            cv2.imwrite(folder + '/test_image_' + str(img_count) + '.' + args.extension, img)
-            cam.release()
+            cv2.imwrite(folder + '/test_image_' + '%06d' % img_count + '.' + args.extension, img)
         else:
             print('Something went wrong taking the image, is the camera connected?')
+        cam.release()
 
     # Try to save image
     print(f'Taking an image at: {now}')
@@ -36,6 +37,10 @@ def capture_image(**kwargs):
 
 def generate_timelapse(**kwargs):
     # Loop through folders containing images
+    args = kwargs['kwargs']
+
+    for path in Path('src').rglob('*.c'):
+        print(path.name)
     pass
     # Use FFMPEG to save the timelapse
 
@@ -54,6 +59,8 @@ def timelapse(args):
     else:
         seconds = '*/' + str(args.sec_between)
         sched.add_job(capture_image, trigger='cron', hour=work_hours, second=seconds, id='timelapse', kwargs={'kwargs': args}, timezone=timezone)
+
+
 
     try:
         sched.start()
