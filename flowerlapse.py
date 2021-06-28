@@ -6,6 +6,7 @@ import uuid
 
 from functionality.test_camera import test_image, test_stream
 from functionality.timelapse import timelapse
+from functionality.summary import summary
 
 PATH = Path().resolve()
 now = datetime.now()

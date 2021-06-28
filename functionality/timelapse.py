@@ -43,14 +43,14 @@ def daily_timelapse(**kwargs):
     # Loop through folders containing images
     args = kwargs['kwargs']
     base_path = create_path(args)
-    image_paths = Path(base_path + '/images').rglob(args.extension)
+    image_paths = Path(base_path).rglob('*' + args.extension)
     image_paths_sorted = sorted(image_paths, key=os.path.getmtime)
 
     fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
     out = cv2.VideoWriter(base_path + '/daily_timelapse.mp4', fourcc, args.fps, (640,  480))
 
     for image_path in image_paths_sorted:
-        frame = cv2.imread(image_path)
+        frame = cv2.imread(str(image_path))
         out.write(frame)
 
     out.release()
@@ -71,7 +71,7 @@ def timelapse(args):
         seconds = '*/' + str(args.sec_between)
         sched.add_job(capture_image, trigger='cron', hour=work_hours, second=seconds, id='frame_gen', kwargs={'kwargs': args}, timezone=timezone)
 
-    sched.add_job(daily_timelapse, trigger='cron', hour='11', minute='30', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
+    sched.add_job(daily_timelapse, trigger='cron', hour='11', minute='47', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
 
     try:
         sched.start()

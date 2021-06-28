@@ -3,7 +3,7 @@ import os
 import cv2
 
 PATH = Path().resolve()
-PATH = PATH / 'eafbf869' / '27_06'
+PATH = PATH / '69b5d798' / '28_06'
 
 img_list = Path(PATH).rglob('*.jpg')
 img_list = sorted(img_list, key=os.path.getmtime)
