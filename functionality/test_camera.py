@@ -1,6 +1,17 @@
 import cv2
 
 def test_image(args):
+    '''
+    Summary:
+    Function to take a test image and save to drive. Saves image at
+    <file root> / test_image.jpg
+
+    Inputs:
+    ArgumentParser args : args.cam_id and args.extension are used
+
+    Outputs:
+    None. Saves at <file root> / test_image.jpg
+    '''
     cam = cv2.VideoCapture(args.cam_id)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')
@@ -9,7 +20,7 @@ def test_image(args):
         if s:
             cv2.imshow("cam-test",img)
             cv2.waitKey(0)
-            cv2.imwrite("test_image.jpg",img)
+            cv2.imwrite("test_image." + args.extension, img)
             cam.release()
             cv2.destroyAllWindows()
         else:
@@ -17,6 +28,16 @@ def test_image(args):
 
 
 def test_stream(args):
+    '''
+    Summary:
+    Function to show a test stream, useful when placing the camera.
+
+    Inputs:
+    ArgumentParser args : args.cam_id is used
+
+    Outputs:
+    None. Opens new window to show cam outputs
+    '''
     cam = cv2.VideoCapture(args.cam_id)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')

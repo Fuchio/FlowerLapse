@@ -7,6 +7,18 @@ import cv2
 img_count = 0
 
 def create_path(args):
+    '''
+    Summary:
+    Create directories to save all images and timelapses in.
+    Returns the base directory.
+
+    Inputs:
+    ArgumentParser args : args.path and args.timelapse_id are used.
+
+    Outputs:
+    base_dir : Directory that serves as a base to save all images and timelapses.
+
+    '''
     now = datetime.now()
     print(f'Taking an image at: {now}', flush=True)
     day = now.strftime("%d_%m")
@@ -20,6 +32,16 @@ def create_path(args):
 
 
 def capture_image(**kwargs):
+    '''
+    Summary:
+    Job to capture new images and save them to disk with appropriate numbering.
+
+    Inputs:
+    ArgumentParser args : args.cam_id, args.extension are used
+
+    Outputs:
+    None. Images are saved to disk.
+    '''
     global img_count
     img_count += 1
 
@@ -40,6 +62,16 @@ def capture_image(**kwargs):
 
 
 def daily_timelapse(**kwargs):
+    '''
+    Summary:
+    Function that is used by apscheduler to create a timelapse every day from all pics made that day.
+
+    Inputs:
+    ArgumentParser args : args.extension and args.fps are used.
+
+    Outputs:
+    None. Timelapse is saved to disk
+    '''
     # Loop through folders containing images
     args = kwargs['kwargs']
     base_path = create_path(args)
@@ -57,6 +89,20 @@ def daily_timelapse(**kwargs):
 
 
 def timelapse(args):
+    '''
+    Summary:
+    Main function to handle the different scheduler jobs. Starts one job to create images and one to create timelapses.
+
+    Inputs:
+    ArgumentParser args : args.start_hour,
+                          args.end_hour,
+                          args.timezone,
+                          args.min_between,
+                          args.sec_between
+
+    Outputs:
+    None
+    '''
     sched = BlockingScheduler(standalone=True)
 
     # Take one from the end_hour, if it has to stop at 17:00 the scheduler needs to be set at 16:00
@@ -71,7 +117,7 @@ def timelapse(args):
         seconds = '*/' + str(args.sec_between)
         sched.add_job(capture_image, trigger='cron', hour=work_hours, second=seconds, id='frame_gen', kwargs={'kwargs': args}, timezone=timezone)
 
-    sched.add_job(daily_timelapse, trigger='cron', hour='11', minute='47', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
+    sched.add_job(daily_timelapse, trigger='cron', hour='12', minute='15', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
 
     try:
         sched.start()

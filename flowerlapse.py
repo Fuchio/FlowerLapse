@@ -97,7 +97,7 @@ def main():
         test_stream(args)
 
     else:
-        print('RUNNING: TIMELAPSE')
+        summary(args)
         timelapse(args)
 
 
