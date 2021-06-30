@@ -14,8 +14,8 @@ TODO features list:
 - Multiple options for video extension if requested, just .mp4 now
 - Add # of image and length of timelapse calculations to summary.py
 - Settable (x, y) resolution
-- Use default camera resolution instead of 640x480
-- Add overlay with current datetime and flowerlapse
+- ~~Use default camera resolution instead of 640x480~~
+- ~~Add overlay with current datetime and flowerlapse~~
 
 TODO test list:
 - Test different save location and faulty location

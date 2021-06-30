@@ -13,6 +13,8 @@ def test_image(args):
     None. Saves at <file root> / test_image.jpg
     '''
     cam = cv2.VideoCapture(args.cam_id)
+    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')
     else:
@@ -39,6 +41,8 @@ def test_stream(args):
     None. Opens new window to show cam outputs
     '''
     cam = cv2.VideoCapture(args.cam_id)
+    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')
     else:
