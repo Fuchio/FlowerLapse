@@ -4,6 +4,8 @@ from pathlib import Path
 import os
 import cv2
 
+from .overlay import add_overlay
+
 img_count = 0
 
 def create_path(args):
@@ -17,12 +19,11 @@ def create_path(args):
 
     Outputs:
     base_dir : Directory that serves as a base to save all images and timelapses.
-
     '''
     now = datetime.now()
     print(f'Taking an image at: {now}', flush=True)
     day = now.strftime("%d_%m")
-    # TODO: Fix timelapse ID
+
     base_dir = args.path + '/' + args.timelapse_id + '/' + day
     img_dir = base_dir + '/images/'
 
@@ -49,12 +50,17 @@ def capture_image(**kwargs):
     args = kwargs['kwargs']
     base_path = create_path(args) + '/images'
 
+    print(f'Using Overlay: {args.overlay_off}')
+
     cam = cv2.VideoCapture(args.cam_id, cv2.CAP_DSHOW)
     if not cam:
         print(f'Failed VideoCapture: Invalid parameter {args.cam_id}')
     else:
         s, img = cam.read()
         if s:
+            if not args.overlay_off:
+                img = add_overlay(img)
+
             cv2.imwrite(base_path + '/image_' + '%06d' % img_count + '.' + args.extension, img)
         else:
             print('Something went wrong taking the image, is the camera connected?')

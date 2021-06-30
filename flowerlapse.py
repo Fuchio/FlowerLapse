@@ -28,16 +28,6 @@ def main():
                         default=TIMELAPSE_ID,
                         help='ID that will be used to create a base directory to store images. Defaults to a generated ID.')
 
-    parser.add_argument('--test_image',
-                        default=False,
-                        action='store_true',
-                        help='Test the camera by taking a single image, image will be shown and saved to disk.')
-
-    parser.add_argument('--test_stream',
-                        default=False,
-                        action='store_true',
-                        help='Test the camera by displaying a videostream. Handy when placing the camera.')
-
     parser.add_argument('--sec_between',
                         type=int,
                         default=30,
@@ -78,12 +68,20 @@ def main():
                         default='jpg',
                         help='Image extension, can be .jpg, .png or any OpenCV supported format. default is .jpg.')
 
+    parser.add_argument('-overlay_off',
+                        default=False,
+                        action='store_true',
+                        help='Option to remove overlay from timelapse. Default is True (on)')
 
-    # Daily lapse ?
-    # Weekly lapse ?
-    # Monthly lapse ?
-    # Total lapse ?
+    parser.add_argument('-test_image',
+                        default=False,
+                        action='store_true',
+                        help='Test the camera by taking a single image, image will be shown and saved to disk.')
 
+    parser.add_argument('-test_stream',
+                        default=False,
+                        action='store_true',
+                        help='Test the camera by displaying a videostream. Handy when placing the camera.')
 
     args = parser.parse_args()
 
