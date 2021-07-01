@@ -41,7 +41,7 @@ The features for concatenate.py work the same as flowerlapse. See possibilities 
 `--fps`: FPS for the total timelapse. Default = 30.
 
 # NOTES:
-- Daily timelapses are created at 23:50 of that day.
+- Daily timelapses are created at 23:55 of that day.
 
 # Installation
 Clone this repo with:
