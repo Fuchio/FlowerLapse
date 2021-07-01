@@ -4,10 +4,10 @@ FlowerLapse is a fully configurable tool to create timelapses. It depends on jus
 # Usage
 ## Flowerlapse.py (image generation and daily timelapses)
 After installation (see how to install below) navigate to the FlowerLapse directory and run the following command:\
-`python flowerlapse.py`\
+`python flowerlapse.py`
 
 This runs FlowerLapse with the following DEFAULT settings. An example with custom settings looks like this:\
-`python flowerlapse.py cam_id 2 --min_between 2 --path C:/User/Fuchio/Desktop --timelapse_id cool_timelapse`\
+`python flowerlapse.py cam_id 2 --min_between 2 --path C:/User/Fuchio/Desktop --timelapse_id cool_timelapse`
 
 To test your camera use one of the lines below:\
 `python flowerlapse.py -test_image`: Takes a single frame and shows if possible (NOT TESTED ON LINUX SERVER).\
@@ -27,41 +27,41 @@ Both can be ran by specifying a different camera id with --cam_id.
 `--extension`: Image extension to save the images. Default = jpg.\
 `-overlay_off`: BOOL add -overlay_off to the flowerlapse.py call to create timelapse without timestamp overlay.\
 `-test_image`: BOOL add -test_image to run the single image test instead of timelapse generation.\
-`-test_stream`: BOOL add -test_stream to run the video stream test instead of timelapse generation.\
+`-test_stream`: BOOL add -test_stream to run the video stream test instead of timelapse generation.
 
 ## Concatenate.py (extended timelapse generation)
 Navigate to the FlowerLapse directory and run the following command:\
 `python concatenate.py --timelapse_id <your_timelapse_id>`\
-The features for concatenate.py work the same as flowerlapse. See possibilities below.\
+The features for concatenate.py work the same as flowerlapse. See possibilities below.
 
 ## Concatenate.py Features
 `--timelapse_id`: **REQUIRED** ID of all the timelapse where all daily timelapses will be taken from.\
 `--path`: **Required if** specified with flowerlapse.py. Base path where your timelapse is saved.\
 `--start_date`: TODO\
 `--end_date`: TODO\
-`--fps`: FPS for the total timelapse. Default = 30.\
+`--fps`: FPS for the total timelapse. Default = 30.
 
 # NOTES:
-- Daily timelapses are created at 23:55 of that day.\
+- Daily timelapses are created at 23:55 of that day.
 
 # Installation
 Clone this repo with:\
 `git clone https://github.com/Fuchio/FlowerLapse.git`\
 Install requirements:\
 `pip install -r requirements.txt`\
-Navigate to /FlowerLapse/ and you should be able to run the code!\
+Navigate to /FlowerLapse/ and you should be able to run the code!
 
-If you get "opencv importerror libclass.so.3" run the following:\
-`sudo apt-get install libatlas-base-dev`\
+If you get "opencv importerror libclass.so.3" run the following:
+`sudo apt-get install libatlas-base-dev`
 
-TODO features list:\
-- Possibility to restart an existing timelapse\
-- Multiple options for video extension if requested, just .mp4 now\
-- Add # of image and length of timelapse calculations to summary.py\
-- Settable (x, y) resolution\
-- Possibility to specify a start and end date for the total timelapse\
-- ~~Use default camera resolution instead of 640x480~~\
-- ~~Add overlay with current datetime and flowerlapse~~\
+# TODO features list:
+- Possibility to restart an existing timelapse
+- Multiple options for video extension if requested, just .mp4 now
+- Add # of image and length of timelapse calculations to summary.py
+- Settable (x, y) resolution
+- Possibility to specify a start and end date for the total timelapse
+- ~~Use default camera resolution instead of 640x480~~
+- ~~Add overlay with current datetime and flowerlapse~~
 
 
  # License:
