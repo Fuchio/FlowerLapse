@@ -45,7 +45,7 @@ def main():
 
     parser.add_argument('--end_hour',
                         type=int,
-                        default=24,
+                        default=22,
                         help='Stop taking pictures for the timelapse after 24:00 by default. Int between 1 and 24.')
 
     parser.add_argument('--fps',

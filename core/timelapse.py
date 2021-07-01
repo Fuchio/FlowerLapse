@@ -125,7 +125,7 @@ def timelapse(args):
         seconds = '*/' + str(args.sec_between)
         sched.add_job(capture_image, trigger='cron', hour=work_hours, second=seconds, id='frame_gen', kwargs={'kwargs': args, 'cam': cam}, timezone=timezone)
 
-    sched.add_job(daily_timelapse, trigger='cron', hour='16', minute='15', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
+    sched.add_job(daily_timelapse, trigger='cron', hour='23', minute='55', id='daily_timelapse', kwargs={'kwargs': args}, timezone=timezone)
 
     try:
         sched.start()

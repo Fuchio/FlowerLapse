@@ -1,2 +1,2 @@
 apscheduler==3.7.0
-opencv-python==4.5.2.54
+opencv-python
