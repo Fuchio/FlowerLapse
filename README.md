@@ -1,5 +1,5 @@
 # FlowerLapse
-FlowerLapse is a fully configurable tool to create timelapses. It depends on just OpenCV for all image related stuff (reading/writing, combining, overlays, etc.) and AP Scheduler to schedule the framegrabber and timelapse generator jobs. There currently is a bug in AP Scheduler that prevents the possibility to create and Interval AND Cron trigger, this means that if you specify seconds = 40, the job will run once a minute but every time at 1:40, 2:40, 3:40 etc. So the true interval will still be one minute. Clean divisions of 1 hour or 1 minute are recommended (30s, 20s, 15s, 10s etc.).
+FlowerLapse is a fully configurable tool to create timelapses. It depends on just OpenCV for all image related stuff (reading/writing, combining, overlays, etc.) and AP Scheduler to schedule the framegrabber and timelapse generator jobs.
 
 # Usage
 ## Flowerlapse.py (image generation and daily timelapses)
