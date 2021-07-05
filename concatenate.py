@@ -35,11 +35,12 @@ def concatenate_timelapses(args, tl_paths):
     None. Saves complete timelapse to disk.
     '''
     fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
-    out = cv2.VideoWriter(str(PATH) + '/' + args.timelapse_id + '/' + args.timelapse_id + '_timelapse.mp4', fourcc, args.fps, (640,  480))
+    out = cv2.VideoWriter(str(PATH) + '/' + args.timelapse_id + '/' + args.timelapse_id + '_timelapse.mp4', fourcc, args.fps, (1280,  720))
 
     for tl_path in tl_paths:
         # VideoCapture can't load a file with backslashes so we make sure foreward slashes are used.
         tl_path_fixed = str(tl_path).replace(os.sep, '/')
+        print(tl_path_fixed)
         curr_tl = cv2.VideoCapture(tl_path_fixed)
         while curr_tl.isOpened():
             s, img = curr_tl.read()

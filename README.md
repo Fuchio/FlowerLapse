@@ -60,6 +60,7 @@ If you get "opencv importerror libclass.so.3" run the following:
 - Add # of image and length of timelapse calculations to summary.py
 - Settable (x, y) resolution
 - Possibility to specify a start and end date for the total timelapse
+- Add TQDM to track progress when running concatenate.py
 - ~~Use default camera resolution instead of 640x480~~
 - ~~Add overlay with current datetime and flowerlapse~~
 
